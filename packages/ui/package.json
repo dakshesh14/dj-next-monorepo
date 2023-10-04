@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint \"**/*.ts*\"",
-    "ui:add": "pnpm dlx shadcn-ui@latest add"
+    "ui:add": "pnpm dlx shadcn-ui@latest add",
+    "postui:add": "node ./scripts/postinstall.mjs"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
