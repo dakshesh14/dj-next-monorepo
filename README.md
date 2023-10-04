@@ -1,6 +1,6 @@
 # Django Next.js Monorepo with turpo
 
-This is a Django and Next.js monorepo project made using turbo. 
+This is a Django and Next.js monorepo project made using turbo.
 
 ## Getting Started
 
@@ -65,9 +65,22 @@ python manage.py migrate
 pnpm dev
 ```
 
+## Future Plans
+
+- [ ] Add docker-compose setup
+- [ ] Use turbo to interact with the backend
+
 ## Contributing
 
 Coming soon...
+
+## Acknowledgements
+
+- [Django](https://www.djangoproject.com/)
+- [Next.js](https://nextjs.org/)
+- [turbo](https://turbo.hotwire.dev/)
+- [pnpm](https://pnpm.io/)
+- [dan5py](https://github.com/dan5py/turborepo-shadcn-ui)
 
 ## License
 
