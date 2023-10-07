@@ -8,9 +8,24 @@ services:
       context: .
       dockerfile: ./apps/web/prod.Dockerfile
     restart: always
-    # FIXME: set this with nginx
+    networks:
+      - my_network
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    volumes:
+      - ./nginx/sites-enabled:/etc/nginx/sites-enabled
+      - ./nginx/logs:/var/log/nginx
     ports:
+      - 80:80
+      - 443:443
       - 3000:3000
+    depends_on:
+      - web
+    restart: always
     networks:
       - my_network
 
