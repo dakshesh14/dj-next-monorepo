@@ -1,0 +1,22 @@
+# `version` is now deprecated
+# https://docs.docker.com/compose/compose-file/#version-top-level-element
+
+services:
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: ./apps/web/prod.Dockerfile
+    restart: always
+    # FIXME: set this with nginx
+    ports:
+      - 3000:3000
+    networks:
+      - my_network
+
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  my_network:
+    external: true
