@@ -11,6 +11,20 @@ services:
     networks:
       - my_network
 
+  postgres:
+    build:
+      context: ./backend/main
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: django_production_postgres
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data
+      - production_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.production/.postgres
+
+  redis:
+    image: redis:6
+
   nginx:
     container_name: nginx
     build:
