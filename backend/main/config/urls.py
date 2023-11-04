@@ -5,7 +5,7 @@ from django.urls import path
 from django.views import defaults as default_views
 
 urlpatterns = [
-    path(settings.ADMIN_URL, admin.site.urls),
+    path("admin/", admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS

@@ -11,6 +11,22 @@ services:
     networks:
       - my_network
 
+  django: &django
+    build:
+      context: ./backend/main
+      dockerfile: ./compose/production/django/Dockerfile
+    image: main_production_django
+    container_name: django
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.envs/.production/.django
+      - ./.envs/.production/.postgres
+    command: /start
+    networks:
+      - my_network
+
   postgres:
     build:
       context: ./backend/main
@@ -21,9 +37,13 @@ services:
       - production_postgres_data_backups:/backups
     env_file:
       - ./.envs/.production/.postgres
+    networks:
+      - my_network
 
   redis:
     image: redis:6
+    networks:
+      - my_network
 
   nginx:
     container_name: nginx
@@ -37,8 +57,10 @@ services:
       - 80:80
       - 443:443
       - 3000:3000
+      - 8000:8000
     depends_on:
       - web
+      - django
     restart: always
     networks:
       - my_network
