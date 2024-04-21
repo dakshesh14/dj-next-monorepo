@@ -1,6 +1,7 @@
 """
 Base settings to build other settings files upon.
 """
+
 import os
 from datetime import timedelta
 from pathlib import Path
@@ -67,7 +68,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    # custom apps go here
+    "core.users.apps.AccountsConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -80,7 +81,7 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
-# AUTH_USER_MODEL = "<custom model>.User"
+AUTH_USER_MODEL = "users.User"
 
 
 # PASSWORDS

@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from django.views import defaults as default_views
 
 urlpatterns = [
@@ -9,7 +9,9 @@ urlpatterns = [
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS
-urlpatterns += []
+urlpatterns += [
+    path("api/users/", include("core.users.urls", namespace="users")),
+]
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
