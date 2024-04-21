@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, get_user_model
+
 # rest framework
 from rest_framework import serializers
 
@@ -74,10 +75,9 @@ class GoogleLoginSerializer(serializers.Serializer):
         )
 
         if created:
-            user.username = id_info["username"]
-            user.first_name = id_info["first_name"]
-            user.last_name = id_info["last_name"]
-            user.avatar = id_info.get("picture", None)
+            user.username = id_info.get("username")
+            user.first_name = id_info.get("first_name")
+            user.last_name = id_info.get("last_name")
 
             user.set_unusable_password()
             user.save()

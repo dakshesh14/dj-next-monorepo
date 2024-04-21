@@ -5,17 +5,24 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.core.validators import validate_email
+
 # rest framework
 from rest_framework import generics, permissions, status
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 # simple jwt
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 
 # serializers
-from .serializers import (GoogleLoginSerializer, LoginSerializer,
-                          RegisterSerializer, UserSerializer)
+from .serializers import (
+    GoogleLoginSerializer,
+    LoginSerializer,
+    RegisterSerializer,
+    UserSerializer,
+)
+
 # utils
 from .utils.auth_helper import UserToken
 from .utils.mail_helper import send_magic_link_email
