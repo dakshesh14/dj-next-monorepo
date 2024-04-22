@@ -1,10 +1,16 @@
 from django.urls import path
-# simple jwt
-from rest_framework_simplejwt.views import TokenBlacklistView
 
-from .views import (GoogleOAuthAPI, LoginAPI, MagicLinkGenerationAPI,
-                    MagicLinkVerificationAPI, RefreshTokenAPI, RegisterAPI,
-                    UserAPI)
+# simple jwt
+from rest_framework_simplejwt.views import TokenBlacklistView, TokenRefreshView
+
+from .views import (
+    GoogleOAuthAPI,
+    LoginAPI,
+    MagicLinkGenerationAPI,
+    MagicLinkVerificationAPI,
+    RegisterAPI,
+    UserAPI,
+)
 
 app_name = "accounts-api"
 
@@ -15,9 +21,9 @@ urlpatterns = [
     # user related
     path("user/me/", UserAPI.as_view(), name="user"),
     # token related
-    path("refresh-token/", RefreshTokenAPI.as_view(), name="refresh-token"),
+    path("refresh-token/", TokenRefreshView.as_view(), name="refresh_token"),
     # o-auth
-    path("google-login", GoogleOAuthAPI.as_view(), name="google-login"),
+    path("google-login", GoogleOAuthAPI.as_view(), name="google_login"),
     # magic link
     path(
         "magic-link/generate/",

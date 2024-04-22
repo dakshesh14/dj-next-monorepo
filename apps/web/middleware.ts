@@ -5,7 +5,7 @@ import AuthenticationService from "@/services/auth-service";
 
 const redirect = (req: NextRequest) => {
   const url = req.nextUrl.clone();
-  url.pathname = "/auth/login";
+  url.pathname = "/login";
   return NextResponse.redirect(url);
 };
 
@@ -19,7 +19,7 @@ export const middleware = async (req: NextRequest) => {
 
   if (accessToken) {
     try {
-      await AuthenticationService.getUserDetails();
+      await AuthenticationService.getMe();
     } catch (error: any) {
       if (error?.response && error.response.status === 401) {
         try {
@@ -34,7 +34,7 @@ export const middleware = async (req: NextRequest) => {
 
   if (refreshToken) {
     try {
-      await AuthenticationService.getUserDetails();
+      await AuthenticationService.getMe();
     } catch (error: any) {
       if (error?.response && error.response.status === 401) {
         return redirect(req);

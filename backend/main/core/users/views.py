@@ -12,9 +12,6 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-# simple jwt
-from rest_framework_simplejwt.serializers import TokenRefreshSerializer
-
 # serializers
 from .serializers import (
     GoogleLoginSerializer,
@@ -97,26 +94,6 @@ class UserAPI(generics.RetrieveUpdateAPIView):
         serializer.save()
 
         return Response(serializer.data)
-
-
-class RefreshTokenAPI(generics.GenericAPIView):
-    permission_classes = [
-        permissions.AllowAny,
-    ]
-
-    serializer_class = TokenRefreshSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        token = serializer.validated_data
-
-        return Response(
-            {
-                "refresh_token": token["refresh_token"],
-                "access_token": token["access_token"],
-            }
-        )
 
 
 class GoogleOAuthAPI(generics.GenericAPIView):

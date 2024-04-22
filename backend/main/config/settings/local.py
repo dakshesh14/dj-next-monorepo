@@ -50,3 +50,6 @@ if SIMPLE_JWT:
         **SIMPLE_JWT,
         "SIGNING_KEY": SECRET_KEY,
     }
+
+
+CORS_ALLOW_ALL_ORIGINS = True

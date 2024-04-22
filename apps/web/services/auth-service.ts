@@ -11,7 +11,7 @@ type LoginResponse = any;
 class AuthenticationService extends ApiBase {
   static async login(email: string, password: string) {
     const response = await this.postWithoutHeader<LoginResponse>(
-      "/accounts/login/",
+      "/api/users/login/",
       {
         email,
         password,
@@ -26,7 +26,7 @@ class AuthenticationService extends ApiBase {
 
   static async register(userForm: UserForm) {
     const response = await this.postWithoutHeader<LoginResponse>(
-      "/accounts/register/",
+      "/api/users/register/",
       userForm
     );
 
@@ -37,7 +37,7 @@ class AuthenticationService extends ApiBase {
   }
 
   static refreshToken = async () => {
-    const response = await this.post<any>("/token/refresh/", {
+    const response = await this.post<any>("/api/users/refresh-token/", {
       refresh: Cookies.get("refreshToken"),
     });
     Cookies.set("accessToken", response.access, {
@@ -46,22 +46,13 @@ class AuthenticationService extends ApiBase {
     return response.access;
   };
 
-  static getUserDetails = async () => {
-    return await this.get("/user/");
-  };
-
   static async getMe() {
-    const response = await this.get<User>("/accounts/me/");
-    return response;
-  }
-
-  static async updateMe(userForm: UserForm) {
-    const response = await this.patch<User>("/accounts/me/", userForm);
+    const response = await this.get<User>("/api/users/me/");
     return response;
   }
 
   static async logout() {
-    const response = await this.post("/accounts/logout/", {});
+    const response = await this.post("/api/users/logout/", {});
     return response;
   }
 }
