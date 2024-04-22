@@ -13,12 +13,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 # serializers
-from .serializers import (
-    GoogleLoginSerializer,
-    LoginSerializer,
-    RegisterSerializer,
-    UserSerializer,
-)
+from .serializers import GoogleLoginSerializer, LoginSerializer, RegisterSerializer, UserSerializer
 
 # utils
 from .utils.auth_helper import UserToken
@@ -43,9 +38,7 @@ class RegisterAPI(generics.GenericAPIView):
 
         return Response(
             {
-                "user": UserSerializer(
-                    user, context=self.get_serializer_context()
-                ).data,
+                "user": UserSerializer(user, context=self.get_serializer_context()).data,
                 "refresh_token": token["refresh_token"],
                 "access_token": token["access_token"],
             }
@@ -68,9 +61,7 @@ class LoginAPI(generics.GenericAPIView):
 
         return Response(
             {
-                "user": UserSerializer(
-                    user, context=self.get_serializer_context()
-                ).data,
+                "user": UserSerializer(user, context=self.get_serializer_context()).data,
                 "refresh_token": token["refresh_token"],
                 "access_token": token["access_token"],
             }
@@ -112,9 +103,7 @@ class GoogleOAuthAPI(generics.GenericAPIView):
 
         return Response(
             {
-                "user": UserSerializer(
-                    user, context=self.get_serializer_context()
-                ).data,
+                "user": UserSerializer(user, context=self.get_serializer_context()).data,
                 "refresh_token": token["refresh_token"],
                 "access_token": token["access_token"],
             }
@@ -130,9 +119,7 @@ class MagicLinkGenerationAPI(APIView):
         email = request.data.get("email")
 
         if not email:
-            return Response(
-                {"message": "Email is required"}, status=status.HTTP_400_BAD_REQUEST
-            )
+            return Response({"message": "Email is required"}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             validate_email(email)
@@ -209,9 +196,7 @@ class MagicLinkVerificationAPI(APIView):
         data = json.loads(cache.get(key))
 
         if data["token"] != token:
-            return Response(
-                {"message": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST
-            )
+            return Response({"message": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST)
 
         # get or create user
         user, created = User.objects.get_or_create(email=email)
