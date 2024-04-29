@@ -2,6 +2,8 @@
 
 This is a Django and Next.js monorepo project made using turbo.
 
+| Note: I recommend using this cookiecutter instead: https://github.com/dakshesh14/django-next-cookiecutter for more customization.
+
 ## Getting Started
 
 This is a monorepo project, meaning it contains all the required code in single repository. The project is divided into 3 parts:
